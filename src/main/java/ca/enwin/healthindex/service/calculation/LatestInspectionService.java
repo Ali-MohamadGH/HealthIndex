@@ -1,0 +1,77 @@
+package ca.enwin.healthindex.service.calculation;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import ca.enwin.healthindex.model.AssetInspection;
+import ca.enwin.healthindex.model.InspectionMeasurement;
+
+public class LatestInspectionService {
+
+    public List<AssetInspection> getLatestInspections(
+            List<InspectionMeasurement> measurements) {
+
+        Map<String,
+                Map<LocalDate,
+                        List<InspectionMeasurement>>>
+                grouped =
+
+                measurements.stream()
+
+                        .collect(
+                                Collectors.groupingBy(
+                                        InspectionMeasurement::equipmentId,
+
+                                        Collectors.groupingBy(
+                                                InspectionMeasurement::inspectionDate
+                                        )));
+
+        List<AssetInspection> inspections =
+                new ArrayList<>();
+
+        for (String equipment :
+                grouped.keySet()) {
+
+            LocalDate latestDate =
+
+                    grouped.get(equipment)
+                            .keySet()
+                            .stream()
+                            .max(LocalDate::compareTo)
+                            .orElse(null);
+
+            if (latestDate == null) {
+                continue;
+            }
+
+            List<InspectionMeasurement>
+                    latestMeasurements =
+
+                    new ArrayList<>(
+
+                            grouped.get(equipment)
+                                    .get(latestDate));
+
+            for (InspectionMeasurement m :
+                    latestMeasurements) {
+
+                
+            }
+
+            inspections.add(
+
+                    new AssetInspection(
+
+                            equipment,
+
+                            latestDate,
+
+                            latestMeasurements));
+        }
+
+        return inspections;
+    }
+}
