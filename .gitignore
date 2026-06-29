@@ -1,0 +1,10 @@
+src/
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+target/test-classes/
+target/health-index.db
+target/HealthIndex-1.0.jar
+target/original-HealthIndex-1.0.jar
+health-index.db
