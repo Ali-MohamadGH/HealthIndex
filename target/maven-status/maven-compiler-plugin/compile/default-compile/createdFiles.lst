@@ -1,4 +1,5 @@
 ca\enwin\healthindex\service\imports\ExcelUtils.class
+ca\enwin\healthindex\ui\BatchHealthIndexPanel$2.class
 ca\enwin\healthindex\model\ExportResult.class
 ca\enwin\healthindex\ui\WeightPanel.class
 ca\enwin\healthindex\service\imports\ConversionImportService.class
@@ -36,6 +37,7 @@ ca\enwin\healthindex\service\imports\CategoryImportService.class
 ca\enwin\healthindex\model\HealthIndexBreakdown.class
 ca\enwin\healthindex\model\MeasurementScore.class
 ca\enwin\healthindex\repository\WeightRepository.class
+ca\enwin\healthindex\ui\BatchHealthIndexPanel$3.class
 ca\enwin\healthindex\ui\ResultsPanel.class
 ca\enwin\healthindex\Main.class
 ca\enwin\healthindex\ui\CategoryPanel.class
