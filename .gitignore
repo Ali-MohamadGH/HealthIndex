@@ -1,5 +1,5 @@
-src/
-target/
-!target/classes/
+/src/test/
+/vscode/
+
 health-index.db
 
