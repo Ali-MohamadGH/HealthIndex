@@ -1,5 +1,5 @@
 /src/test/
-/vscode/
+/.vscode/
 /target
 
 health-index.db
