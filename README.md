@@ -20,15 +20,15 @@ Before installation, it would be recommended to make a specific folder locally d
 1. Install Java JDK 25
    1. The appropriate JDK link for the download file is attached above. This JDK was selected as it allows installation for User downloads as opposed to System wide downloads. If a newer version is desired search for JDK’s provided by “Eclipse Temurin”.
    1. Run the installation file, you’ll be met with a Setup Wizard:\
-      ![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.001.png)
+      <img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 001" src="https://github.com/user-attachments/assets/cfe9ab63-02f1-402a-b247-4ab4fd17d06d" />
    1. Next, check the License Agreement, then select next again:\
-      ![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.002.png)
+      <img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 002" src="https://github.com/user-attachments/assets/abf03f9b-3e4c-441f-a27c-09de049c6ee9" />
    1. Make sure you select “Install just for you”, then select next again:\
-      ![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.003.png)
+      <img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 003" src="https://github.com/user-attachments/assets/24422cff-f96a-490c-a440-fd478ee485a9" />
    1. Select the symbol next to “Set or override JAVA\_Home variable” and make sure it is set to “Will be installed on local drive”, then select next once more:\
-      ![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.004.png)
+      <img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 004" src="https://github.com/user-attachments/assets/3227f5e5-eb47-40b0-82a5-9eb3dacb214f" />
    1. Select Install, then Finish:\
-      ![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.005.png) 
+      <img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 005" src="https://github.com/user-attachments/assets/2da8ca82-bef2-4d48-8959-b8f6b6dccf0d" />
 1. Download “HealthIndex-1.0.jar” file from SharePoint and put it in your local folder. Optionally, you can also download the “Current Sheet to Import” for testing purposes.
 ### <a name="_toc233620659"></a>Import Files Setups
 There are four different import files needed to run a health index calculation. All files should be compatible with Excel and must have the “.xlsx” filename extension. The import file specifications will all be provided below:
@@ -39,44 +39,19 @@ To get this file, you’ll need access to “SAP”. Open onto a browser and fol
 
 1. Navigate to the app “Display Measurement Documents”. 
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.006.png)![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.007.png)
-
-
-
 1. Select “Get Variant” and select “PMH Health”: 
-
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.008.png)![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.009.png)
-
-
 
 1. Here the start date can be selected if wanted (default will be all records), as well as measuring points. It would be recommended to select multiple measuring points: 
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.010.png)![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.011.png)
-
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.012.png)
-
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.013.png)
-
-
-
 1. Search for kinds of equipment needed to be analyzed, select all of them, and execute:
-
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.014.png)\
-` `![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.015.png)
-
-
 
 1. Select the box at the top left of the table to select all readings. Then select “Choose”:
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.016.png)![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.017.png)
-
-
-
 1. Select “Execute” once more, and another table will appear select all the equipment, then right click within the table area and select spreadsheet:
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.018.png)![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.019.png)
+<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 019" src="https://github.com/user-attachments/assets/61a13a65-75b6-49ee-b42a-8bd399b7837a" />
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.020.png)
+<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 020" src="https://github.com/user-attachments/assets/304c60c7-9946-4158-9dfa-c1df5e2aab74" />
 
 1. Export as an Excel “.xlsx” file, which will automatically be formatted for the health index software.
 
@@ -174,13 +149,14 @@ A sample table could look like the following:
 
 ## <a name="_toc233620664"></a>Usage
 To begin, simply run “HealthIndex-1.0.jar” in your local folder. You’ll be met with the following interface:\
-![ref1]
+<img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 021" src="https://github.com/user-attachments/assets/56f185ff-49f4-4502-8ec5-f9d76897de55" />
 
 Within this software, there are five tabs, each with its own function, and some require specifically formatted import files. The usage of all these tabs is identified below.
 
 
 ### <a name="_toc233620665"></a>Categories Panel
-![ref2]
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 022" src="https://github.com/user-attachments/assets/216783bc-da3e-4885-b174-45bd8dff5af4" />
+
 
 \
 There are two buttons that appear in the categories panel:
@@ -193,9 +169,9 @@ There are two buttons that appear in the categories panel:
 \
 Sample panel after successful import:
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.023.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 023" src="https://github.com/user-attachments/assets/44318193-e43a-4cac-a293-b7749dd97518" />
 ### <a name="_toc233620666"></a>Conversion Panel
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.024.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 024" src="https://github.com/user-attachments/assets/a0bf1c65-7fcd-4181-a874-7bf823437547" />
 
 There are two buttons that appear in the categories panel:
 
@@ -207,9 +183,9 @@ There are two buttons that appear in the categories panel:
 \
 Sample panel after successful import:
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.025.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 025" src="https://github.com/user-attachments/assets/1f65d5ab-428a-4894-89c5-a1771db70e9e" />
 ### <a name="_toc233620667"></a>Weights Panel
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.026.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 026" src="https://github.com/user-attachments/assets/59163079-1de5-40c9-9c1e-1ac8c9c01d4f" />
 
 There are two buttons that appear in the categories panel:
 
@@ -221,9 +197,9 @@ There are two buttons that appear in the categories panel:
 \
 Sample panel after successful import:
 
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.027.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 027" src="https://github.com/user-attachments/assets/66efe4cb-0cb9-4b12-907a-98ead6ed2926" />
 ### <a name="_toc233620668"></a>Batch Health Index Panel:
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.028.png)
+<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 028" src="https://github.com/user-attachments/assets/14e1da7b-da53-4e24-a8f5-4ec49fbcc932" />
 
 There are three buttons that appear in this panel:
 
@@ -246,10 +222,10 @@ A sample exported results file is provided below:
 |**20010964**|2026-06-22|TRUE|0\.74|0\.41|0\.00|53\.90%|
 
 ### <a name="_toc233620669"></a>Results Panel:
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.029.png)\
+<img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 029" src="https://github.com/user-attachments/assets/4c9b241f-4345-43cd-b559-3fb5327b21d3" />\
 The results panel shows all calculated health indices along with their most recent inspection date, equipment number, and whether there was a gateway failure. There is one button, “Refresh”, which displays the most recent calculated data had there been any changes to the previous data.\
 A sample populated Results Panel is provided below:\
-![](Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.030.png)
+<img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 030" src="https://github.com/user-attachments/assets/ff4ff80f-b5e5-4f8b-a3ff-001363f2df84" />
 ## <a name="_toc233620670"></a>Built With/ Tech Stack
 
 |**Name**|**Version**|
@@ -262,36 +238,4 @@ A sample populated Results Panel is provided below:\
 |**Apache POI**|5\.4.1|
 
 
-[ref1]: Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.021.png
-[ref2]: Aspose.Words.af598ab4-298d-48e6-9a63-4e78751667de.022.png
 
-
-<img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 001" src="https://github.com/user-attachments/assets/a49eafdd-0a6a-4d95-af62-b6b0bed0e4a2" /><img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 030" src="https://github.com/user-attachments/assets/f3f7bda4-2f99-4a55-91ae-5a7f224ae82b" />
-<img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 029" src="https://github.com/user-attachments/assets/7489bb53-4247-410b-b40d-d02478881c33" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 028" src="https://github.com/user-attachments/assets/136687a0-4435-4dc7-933a-f2936bc91c48" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 027" src="https://github.com/user-attachments/assets/3939e6b0-d209-41aa-a49e-87f02b602d65" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 026" src="https://github.com/user-attachments/assets/059e2919-411c-4685-8e7d-157c1c2bf0fe" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 025" src="https://github.com/user-attachments/assets/0985561d-ae50-4474-aaaf-0e1e656147fa" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 024" src="https://github.com/user-attachments/assets/84ab337c-0ddb-46ce-be99-f3ebe5ae8ece" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 023" src="https://github.com/user-attachments/assets/6efc7b3d-d1c4-47ca-9e9d-d7aa89fa283f" />
-<img width="529" height="303" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 022" src="https://github.com/user-attachments/assets/cc6bbd4c-1602-4dbe-a657-8d0db7571751" />
-<img width="624" height="357" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 021" src="https://github.com/user-attachments/assets/610d650d-3510-4c32-85d1-d3d6be9f268d" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 020" src="https://github.com/user-attachments/assets/0202515b-bfa7-44ad-bfd7-4fe1cf21a79a" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 019" src="https://github.com/user-attachments/assets/d525e180-5aad-40ef-8ab8-7bb10493dd7c" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 018" src="https://github.com/user-attachments/assets/b2e6299f-ffa8-4a47-913e-34c12532ae91" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 017" src="https://github.com/user-attachments/assets/feb9c786-1551-4f95-ab2e-53a9cfe0dbf7" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 016" src="https://github.com/user-attachments/assets/50f965d1-3549-46cd-9da8-b31db7af0eea" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 015" src="https://github.com/user-attachments/assets/995044dd-7d82-454d-afb1-4b55bd665dfa" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 014" src="https://github.com/user-attachments/assets/959db03c-beaf-483a-92a2-1e3f20a4b7a7" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 013" src="https://github.com/user-attachments/assets/7c2645ca-f53c-4ed6-9e15-7963813a653b" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 012" src="https://github.com/user-attachments/assets/448e8abf-8ab8-431b-934d-f294d4752647" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 011" src="https://github.com/user-attachments/assets/eeff73de-7fe8-4826-b907-ed5dafb81f09" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 010" src="https://github.com/user-attachments/assets/51fd5d55-7509-4bc1-b93a-ac3196c9cc6f" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 009" src="https://github.com/user-attachments/assets/1fd3e13a-4e49-4c8b-bc60-24c1694a8cfa" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 008" src="https://github.com/user-attachments/assets/08b2ca59-f29b-4da4-838b-b80cab059e55" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 007" src="https://github.com/user-attachments/assets/6cfc24c2-7f1d-412b-b0c2-58b241c057f4" />
-<img width="580" height="348" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 006" src="https://github.com/user-attachments/assets/7fbceb66-cf5f-47c5-ad05-7468974bf020" />
-<img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 005" src="https://github.com/user-attachments/assets/fe3d226e-c716-4688-92b2-3976c78b6566" />
-<img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 004" src="https://github.com/user-attachments/assets/3cf26518-c561-4dab-983c-a95a56c3f4a1" />
-<img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 003" src="https://github.com/user-attachments/assets/ba036054-694f-4834-966a-5d88b508de51" />
-<img width="427" height="334" alt="Aspose Words af598ab4-298d-48e6-9a63-4e78751667de 002" src="https://github.com/user-attachments/assets/47664562-1edc-4f5a-9e57-9dbc5d56f728" />
