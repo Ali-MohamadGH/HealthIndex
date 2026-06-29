@@ -196,11 +196,7 @@ public class HealthIndexCalculator {
                         latestMeasurements);
 
         boolean realgatewayfail;
-        if (gatewayFail == true){
-                realgatewayfail = false;
-        }else{
-                realgatewayfail = true;
-        }
+        realgatewayfail = gatewayFail != true;
 
         return new HealthIndexResult(
 

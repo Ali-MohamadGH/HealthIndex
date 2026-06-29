@@ -55,11 +55,7 @@ public class LatestInspectionService {
                             grouped.get(equipment)
                                     .get(latestDate));
 
-            for (InspectionMeasurement m :
-                    latestMeasurements) {
-
-                
-            }
+            
 
             inspections.add(
 

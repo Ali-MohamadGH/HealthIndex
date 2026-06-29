@@ -12,7 +12,7 @@ public class MainFrame extends JFrame {
         Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
         Color gr = Color.decode("#31B052");
-        Color or = Color.decode("#0D2436");
+      
         Font font = new Font("Arial", Font.PLAIN, 14);
 
         setTitle(

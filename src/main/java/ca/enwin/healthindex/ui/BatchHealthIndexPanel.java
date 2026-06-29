@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
@@ -29,12 +30,12 @@ public class BatchHealthIndexPanel
     public BatchHealthIndexPanel() {
         Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-        Color gr = Color.decode("#31B052");
-        Color gr2 = Color.decode("#adceb6");
+      
+      
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-        Border grBorder = BorderFactory.createLineBorder(gr, 1);
+       
      
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
         
@@ -144,9 +145,7 @@ public class BatchHealthIndexPanel
                                                 + result.rowsImported()
                                                 + "\n");
 
-                        } catch (Exception ex) {
-
-                                ex.printStackTrace();
+                        } catch (InterruptedException | ExecutionException ex) {
                         }
                         }
                 };
@@ -154,72 +153,138 @@ public class BatchHealthIndexPanel
         worker.execute();
         }
     
-    private void calculate() {
+        private void calculate() {
 
-        try {
+        SwingWorker<List<HealthIndexResult>, String>
+                worker =
+                new SwingWorker<>() {
 
-            List<HealthIndexResult>
-                    results =
+                        @Override
+                        protected List<HealthIndexResult>
+                        doInBackground()
+                                throws Exception {
 
-                    new HealthIndexBatchService()
-                            .calculateAll();
+                        return new HealthIndexBatchService()
+                                .calculateAll(
+                                        this::publish);
+                        }
 
-            output.append(
+                        @Override
+                        protected void process(
+                                List<String> chunks) {
 
-                    "Calculated: "
+                        for (String text :
+                                chunks) {
 
-                            + results.size()
+                                output.append(
+                                        text);
+                        }
+                        }
 
-                            + " assets\n");
+                        @Override
+                        protected void done() {
 
-        } catch (Exception ex) {
+                        try {
 
-            ex.printStackTrace();
+                                List<HealthIndexResult>
+                                        results =
+                                        get();
+
+                                output.append(
+
+                                        "\nCalculated: "
+
+                                                + results.size()
+
+                                                + " assets\n");
+
+                        } catch (InterruptedException | ExecutionException ex) {
+                        }
+                        }
+                };
+
+        worker.execute();
         }
-    }
 
     private void export() {
-       
-        JFileChooser chooser =
-                new JFileChooser();
-     
-        
 
-        if (
-                chooser.showSaveDialog(this)
-                        != JFileChooser.APPROVE_OPTION
-        ) {
+    JFileChooser chooser =
+            new JFileChooser();
 
-            return;
-        }
-        
-        try {
+    if (chooser.showSaveDialog(this)
 
-            List<HealthIndexResult>
-                    results =
+            != JFileChooser.APPROVE_OPTION) {
 
-                    new HealthIndexBatchService()
-                            .calculateAll();
-
-            File file =
-                    (chooser.getSelectedFile());
-
-                    
-        if (!file.getName().endsWith(".xlsx")) {
-                file = new File(file.getAbsolutePath() + ".xlsx");
-        }
-
-            new HealthIndexExportService()
-                    .export(
-                            file,
-                            results);
-
-            output.append(
-                    "Exported\n");
-
-        } catch (Exception ex) {
-
-            ex.printStackTrace();
-        }
+        return;
     }
-}
+
+    File selectedFile =
+            chooser.getSelectedFile();
+
+    SwingWorker<Void, String>
+            worker =
+            new SwingWorker<>() {
+
+                @Override
+                protected Void doInBackground()
+                        throws Exception {
+
+                    publish(
+                            "Calculating results...\n");
+
+                    List<HealthIndexResult>
+                            results =
+
+                            new HealthIndexBatchService()
+                                    .calculateAll(
+                                            this::publish);
+
+                    File file =
+                            selectedFile;
+
+                    if (!file.getName()
+                            .endsWith(
+                                    ".xlsx")) {
+
+                        file = new File(
+
+                                file.getAbsolutePath()
+
+                                        + ".xlsx");
+                    }
+
+                    new HealthIndexExportService()
+
+                            .export(
+
+                                    file,
+
+                                    results,
+
+                                    this::publish);
+
+                    return null;
+                }
+
+                @Override
+                protected void process(
+                        List<String> chunks) {
+
+                    for (String text :
+                            chunks) {
+
+                        output.append(
+                                text);
+                    }
+                }
+
+                @Override
+                protected void done() {
+
+                    output.append(
+                            "\nExported\n");
+                }
+            };
+
+    worker.execute();
+}}

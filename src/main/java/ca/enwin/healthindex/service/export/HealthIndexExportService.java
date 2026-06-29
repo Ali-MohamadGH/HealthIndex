@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -20,7 +21,9 @@ public class HealthIndexExportService {
 
             File file,
 
-            List<HealthIndexResult> results)
+            List<HealthIndexResult> results,
+            
+            Consumer<String> logger)
 
             throws Exception {
 
@@ -82,6 +85,12 @@ public class HealthIndexExportService {
 
             for (HealthIndexResult result :
                     results) {
+
+                        
+                logger.accept(
+                        "Exporting "
+                        + result.equipmentId()
+                        + "...\n");
 
                 Row row =
 

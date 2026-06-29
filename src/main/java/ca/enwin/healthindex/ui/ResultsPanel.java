@@ -3,6 +3,7 @@ package ca.enwin.healthindex.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -26,12 +27,12 @@ public class ResultsPanel extends JPanel {
     public ResultsPanel() {
          Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-        Color gr = Color.decode("#31B052");
-        Color gr2 = Color.decode("#adceb6");
+        
+     
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-        Border grBorder = BorderFactory.createLineBorder(gr, 1);
+        
      
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
         
@@ -119,9 +120,9 @@ public class ResultsPanel extends JPanel {
                         });
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
 
-            ex.printStackTrace();
+           
         }
     }
 }

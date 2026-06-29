@@ -2,6 +2,7 @@ package ca.enwin.healthindex.service.calculation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import ca.enwin.healthindex.model.AssetInspection;
 import ca.enwin.healthindex.model.CategoryRule;
@@ -42,7 +43,7 @@ public class HealthIndexBatchService {
             new LatestInspectionService();
 
     public List<HealthIndexResult>
-    calculateAll()
+    calculateAll(Consumer<String> logger)
             throws Exception {
 
         List<InspectionMeasurement>
@@ -65,11 +66,7 @@ public class HealthIndexBatchService {
                 weightRules =
 
                 weightRepository.findAll();
-for (WeightRule rule :
-        weightRules) {
 
-    
-}
         List<ConversionRule>
                 conversionRules =
 
@@ -100,6 +97,11 @@ for (WeightRule rule :
 
             resultRepository.save(
                     result);
+                
+                logger.accept(
+                   "Calculating "
+                 + inspection.equipmentId()
+                 + "...\n");
 
             results.add(result);
         }
