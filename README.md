@@ -1,6 +1,6 @@
-<a name="_toc233620654"></a>PMH SU HEALTH INDEX SOFTWARE (VERSION 1.0)\
-Installation and User Guide*\
-Ali Mohamad
+<img width="1280" height="640" alt="w" src="https://github.com/user-attachments/assets/4630189c-6406-4b68-ada2-bb4213e5658e" />
+
+# Installation and User Guide - Ali Mohamad
 ## <a name="_toc233620655"></a>Description
 The PMU Health Index software was developed primarily for calculating and documenting the health index of pad-mounted switch gears. It could also be used for most other kinds of inventory, such that there are SAP measuring points that can be used as data points for health index calculation.
 ## <a name="_toc233620656"></a>Prerequisites
