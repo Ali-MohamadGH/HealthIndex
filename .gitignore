@@ -2,3 +2,5 @@ src/
 target/
 !target/classes/
 health-index.db
+
+echo ".env" >> .gitignore
