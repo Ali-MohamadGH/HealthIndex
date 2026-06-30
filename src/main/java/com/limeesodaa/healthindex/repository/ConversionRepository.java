@@ -27,12 +27,9 @@ public class ConversionRepository {
                 """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(sql)) {
 
             statement.setString(
                     1,
@@ -53,12 +50,11 @@ public class ConversionRepository {
     public List<ConversionRule> findAll()
             throws SQLException {
 
-        List<ConversionRule>
-                rules =
-                new ArrayList<>();
+        List<ConversionRule> rules
+                = new ArrayList<>();
 
-        String sql =
-                """
+        String sql
+                = """
                 SELECT
                     code_group,
                     source_value,
@@ -70,28 +66,20 @@ public class ConversionRepository {
                 """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                sql);
-
-                ResultSet rs =
-                        statement.executeQuery()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(
+                        sql); ResultSet rs
+                = statement.executeQuery()) {
 
             while (rs.next()) {
 
                 rules.add(
                         new ConversionRule(
-
                                 rs.getString(
                                         "code_group"),
-
                                 rs.getDouble(
                                         "source_value"),
-
                                 rs.getDouble(
                                         "converted_value")
                         ));
@@ -104,17 +92,14 @@ public class ConversionRepository {
     public void deleteAll()
             throws SQLException {
 
-        String sql =
-                "DELETE FROM zhyd_hlth_conv";
+        String sql
+                = "DELETE FROM zhyd_hlth_conv";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(
+                        sql)) {
 
             statement.executeUpdate();
         }

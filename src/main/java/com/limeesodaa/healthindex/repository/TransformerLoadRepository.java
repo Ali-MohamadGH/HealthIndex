@@ -28,12 +28,9 @@ public class TransformerLoadRepository {
             """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(sql)) {
 
             statement.setString(
                     1,
@@ -54,35 +51,27 @@ public class TransformerLoadRepository {
     public List<TransformerLoad> findAll()
             throws SQLException {
 
-        List<TransformerLoad> results =
-                new ArrayList<>();
+        List<TransformerLoad> results
+                = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM zhyd_xfrmr_load";
+        String sql
+                = "SELECT * FROM zhyd_xfrmr_load";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement();
-
-                ResultSet rs =
-                        statement.executeQuery(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement(); ResultSet rs
+                = statement.executeQuery(sql)) {
 
             while (rs.next()) {
 
                 results.add(
                         new TransformerLoad(
-
                                 rs.getString(
                                         "equipment_id"),
-
                                 LocalDate.parse(
                                         rs.getString(
                                                 "load_date")),
-
                                 rs.getDouble(
                                         "loading_score")
                         ));
@@ -96,12 +85,9 @@ public class TransformerLoadRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             statement.executeUpdate(
                     "DELETE FROM zhyd_xfrmr_load");

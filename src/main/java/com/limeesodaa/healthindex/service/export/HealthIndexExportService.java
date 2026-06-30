@@ -18,41 +18,30 @@ import com.limeesodaa.healthindex.model.HealthIndexResult;
 public class HealthIndexExportService {
 
     public File export(
-
             File file,
-
             List<HealthIndexResult> results,
-            
             Consumer<String> logger)
-
             throws Exception {
 
-        Set<String> categories =
-
-                results.stream()
-
-                        .flatMap(result ->
-
-                                result.categoryScores()
-                                        .keySet()
-                                        .stream())
-
+        Set<String> categories
+                = results.stream()
+                        .flatMap(result
+                                -> result.categoryScores()
+                                .keySet()
+                                .stream())
                         .collect(
-
                                 Collectors.toCollection(
                                         LinkedHashSet::new));
 
-        try (Workbook workbook =
-                     new XSSFWorkbook()) {
+        try (Workbook workbook
+                = new XSSFWorkbook()) {
 
-            Sheet sheet =
-
-                    workbook.createSheet(
+            Sheet sheet
+                    = workbook.createSheet(
                             "Verification");
 
-            Row header =
-
-                    sheet.createRow(0);
+            Row header
+                    = sheet.createRow(0);
 
             int col = 0;
 
@@ -68,8 +57,8 @@ public class HealthIndexExportService {
                     .setCellValue(
                             "Gateway Fail");
 
-            for (String category :
-                    categories) {
+            for (String category
+                    : categories) {
 
                 header.createCell(col++)
                         .setCellValue(
@@ -83,18 +72,16 @@ public class HealthIndexExportService {
 
             int rowNumber = 1;
 
-            for (HealthIndexResult result :
-                    results) {
+            for (HealthIndexResult result
+                    : results) {
 
-                        
                 logger.accept(
                         "Exporting "
                         + result.equipmentId()
                         + "...\n");
 
-                Row row =
-
-                        sheet.createRow(
+                Row row
+                        = sheet.createRow(
                                 rowNumber++);
 
                 col = 0;
@@ -111,14 +98,13 @@ public class HealthIndexExportService {
                 row.createCell(col++)
                         .setCellValue(
                                 result.gatewayFail()
-                                        );
+                        );
 
-                for (String category :
-                        categories) {
+                for (String category
+                        : categories) {
 
                     row.createCell(col++)
                             .setCellValue(
-
                                     String.format("%.2f", result.categoryScores()
                                             .getOrDefault(
                                                     category,
@@ -127,7 +113,7 @@ public class HealthIndexExportService {
 
                 row.createCell(col++)
                         .setCellValue(
-                               String.format("%.2f", result.healthIndex()*100.00)+"%");
+                                String.format("%.2f", result.healthIndex() * 100.00) + "%");
             }
 
             for (int i = 0;
@@ -137,9 +123,9 @@ public class HealthIndexExportService {
                 sheet.autoSizeColumn(i);
             }
 
-            try (FileOutputStream out =
-                         new FileOutputStream(
-                                 file)) {
+            try (FileOutputStream out
+                    = new FileOutputStream(
+                            file)) {
 
                 workbook.write(out);
             }
@@ -149,40 +135,38 @@ public class HealthIndexExportService {
     }
 
     private String toTitleCase(
-        String value) {
+            String value) {
 
-    if (value == null
-            || value.isBlank()) {
+        if (value == null
+                || value.isBlank()) {
 
-        return "";
+            return "";
+        }
+
+        StringBuilder result
+                = new StringBuilder();
+
+        for (String word
+                : value.trim()
+                        .toLowerCase()
+                        .split("\\s+")) {
+
+            if (word.isBlank()) {
+                continue;
+            }
+
+            if (result.length() > 0) {
+
+                result.append(" ");
+            }
+
+            result.append(
+                    Character.toUpperCase(
+                            word.charAt(0)))
+                    .append(
+                            word.substring(1));
+        }
+
+        return result.toString();
     }
-
-    StringBuilder result =
-            new StringBuilder();
-
-    for (String word :
-            value.trim()
-                    .toLowerCase()
-                    .split("\\s+")) {
-
-        if (word.isBlank()) {
-            continue;
-        }
-
-        if (result.length() > 0) {
-
-            result.append(" ");
-        }
-
-        result.append(
-
-                Character.toUpperCase(
-                        word.charAt(0)))
-
-                .append(
-                        word.substring(1));
-    }
-
-    return result.toString();
-        }
 }

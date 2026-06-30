@@ -21,9 +21,8 @@ public class HealthIndexResultRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection()) {
 
             connection.setAutoCommit(
                     false);
@@ -39,9 +38,7 @@ public class HealthIndexResultRepository {
                         result);
 
                 connection.commit();
-            }
-
-            catch (Exception ex) {
+            } catch (Exception ex) {
 
                 connection.rollback();
 
@@ -51,11 +48,8 @@ public class HealthIndexResultRepository {
     }
 
     private void saveResult(
-
             Connection connection,
-
             HealthIndexResult result)
-
             throws SQLException {
 
         String sql = """
@@ -71,10 +65,9 @@ public class HealthIndexResultRepository {
             """;
 
         try (
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                sql)
-        ) {
+                PreparedStatement statement
+                = connection.prepareStatement(
+                        sql)) {
 
             statement.setString(
                     1,
@@ -98,11 +91,8 @@ public class HealthIndexResultRepository {
     }
 
     private void saveCategoryScores(
-
             Connection connection,
-
             HealthIndexResult result)
-
             throws SQLException {
 
         String deleteSql = """
@@ -114,10 +104,9 @@ public class HealthIndexResultRepository {
             """;
 
         try (
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                deleteSql)
-        ) {
+                PreparedStatement statement
+                = connection.prepareStatement(
+                        deleteSql)) {
 
             statement.setString(
                     1,
@@ -144,13 +133,12 @@ public class HealthIndexResultRepository {
             """;
 
         try (
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                insertSql)
-        ) {
+                PreparedStatement statement
+                = connection.prepareStatement(
+                        insertSql)) {
 
-            for (var entry :
-                    result.categoryScores()
+            for (var entry
+                    : result.categoryScores()
                             .entrySet()) {
 
                 statement.setString(
@@ -178,60 +166,43 @@ public class HealthIndexResultRepository {
     }
 
     public List<HealthIndexResult>
-    findAll()
+            findAll()
             throws SQLException {
 
-        List<HealthIndexResult> results =
-                new ArrayList<>();
+        List<HealthIndexResult> results
+                = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM health_index_result";
+        String sql
+                = "SELECT * FROM health_index_result";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement();
-
-                ResultSet rs =
-                        statement.executeQuery(
-                                sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement(); ResultSet rs
+                = statement.executeQuery(
+                        sql)) {
 
             while (rs.next()) {
 
-                String equipmentId =
-
-                        rs.getString(
+                String equipmentId
+                        = rs.getString(
                                 "equipment_id");
 
-                LocalDate inspectionDate =
-
-                        LocalDate.parse(
-
+                LocalDate inspectionDate
+                        = LocalDate.parse(
                                 rs.getString(
                                         "inspection_date"));
 
                 results.add(
-
                         new HealthIndexResult(
-
                                 equipmentId,
-
                                 inspectionDate,
-
                                 rs.getDouble(
                                         "health_index"),
-
                                 loadCategoryScores(
-
                                         connection,
-
                                         equipmentId,
-
                                         inspectionDate),
-
                                 rs.getBoolean(
                                         "gateway_fail")));
             }
@@ -241,18 +212,14 @@ public class HealthIndexResultRepository {
     }
 
     private Map<String, Double>
-    loadCategoryScores(
-
-            Connection connection,
-
-            String equipmentId,
-
-            LocalDate inspectionDate)
-
+            loadCategoryScores(
+                    Connection connection,
+                    String equipmentId,
+                    LocalDate inspectionDate)
             throws SQLException {
 
-        Map<String, Double> scores =
-                new HashMap<>();
+        Map<String, Double> scores
+                = new HashMap<>();
 
         String sql = """
             SELECT
@@ -267,10 +234,9 @@ public class HealthIndexResultRepository {
             """;
 
         try (
-                PreparedStatement statement =
-                        connection.prepareStatement(
-                                sql)
-        ) {
+                PreparedStatement statement
+                = connection.prepareStatement(
+                        sql)) {
 
             statement.setString(
                     1,
@@ -282,17 +248,14 @@ public class HealthIndexResultRepository {
                             .toString());
 
             try (
-                    ResultSet rs =
-                            statement.executeQuery()
-            ) {
+                    ResultSet rs
+                    = statement.executeQuery()) {
 
                 while (rs.next()) {
 
                     scores.put(
-
                             rs.getString(
                                     "category"),
-
                             rs.getDouble(
                                     "score"));
                 }
@@ -306,12 +269,9 @@ public class HealthIndexResultRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             statement.executeUpdate(
                     "DELETE FROM health_index_category_score");

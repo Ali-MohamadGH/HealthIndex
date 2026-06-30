@@ -14,23 +14,22 @@ public final class ExcelUtils {
             return "";
         }
 
-        return switch (
-                cell.getCellType()) {
+        return switch (cell.getCellType()) {
 
             case STRING ->
-                    cell.getStringCellValue()
-                            .trim();
+                cell.getStringCellValue()
+                .trim();
 
             case NUMERIC ->
-                    String.valueOf(
-                            (long)
-                            cell.getNumericCellValue());
+                String.valueOf(
+                (long) cell.getNumericCellValue());
 
             case BOOLEAN ->
-                    String.valueOf(
-                            cell.getBooleanCellValue());
+                String.valueOf(
+                cell.getBooleanCellValue());
 
-            default -> "";
+            default ->
+                "";
         };
     }
 
@@ -41,25 +40,24 @@ public final class ExcelUtils {
             return 0;
         }
 
-        return switch (
-                cell.getCellType()) {
+        return switch (cell.getCellType()) {
 
             case NUMERIC ->
-                    cell.getNumericCellValue();
+                cell.getNumericCellValue();
 
             case STRING -> {
 
                 try {
                     yield Double.parseDouble(
-                            cell.getStringCellValue()
-                                    .trim());
-                }
-                catch (Exception ex) {
+                    cell.getStringCellValue()
+                    .trim());
+                } catch (Exception ex) {
                     yield 0;
                 }
             }
 
-            default -> 0;
+            default ->
+                0;
         };
     }
 }

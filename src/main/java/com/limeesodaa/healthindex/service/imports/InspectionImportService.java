@@ -19,34 +19,27 @@ import com.limeesodaa.healthindex.repository.InspectionRepository;
 
 public class InspectionImportService {
 
-    private final InspectionRepository repository =
-            new InspectionRepository();
+    private final InspectionRepository repository
+            = new InspectionRepository();
 
-    private static final DateTimeFormatter
-            DATE_FORMATTER =
-            DateTimeFormatter.ofPattern(
+    private static final DateTimeFormatter DATE_FORMATTER
+            = DateTimeFormatter.ofPattern(
                     "MM/dd/yyyy");
-        
-        
 
-
-    
     public ImportResult importFile(
-            File file,Consumer<String> logger)
+            File file, Consumer<String> logger)
             throws Exception {
 
         int read = 0;
         int imported = 0;
-        
 
         try (
-                Workbook workbook =
-                        new XSSFWorkbook(
-                                new FileInputStream(file))
-        ) {
+                Workbook workbook
+                = new XSSFWorkbook(
+                        new FileInputStream(file))) {
 
-            Sheet sheet =
-                    workbook.getSheetAt(0);
+            Sheet sheet
+                    = workbook.getSheetAt(0);
 
             boolean header = true;
 
@@ -60,22 +53,21 @@ public class InspectionImportService {
 
                 read++;
 
-                String equipmentId =
-                        ExcelUtils.getString(
+                String equipmentId
+                        = ExcelUtils.getString(
                                 row.getCell(0));
-                                logger.accept("Processing: " + equipmentId + "\n");
-                
-                
-                String measurement =
-                        ExcelUtils.getString(
+                logger.accept("Processing: " + equipmentId + "\n");
+
+                String measurement
+                        = ExcelUtils.getString(
                                 row.getCell(2));
 
-                double value =
-                        ExcelUtils.getDouble(
+                double value
+                        = ExcelUtils.getDouble(
                                 row.getCell(3));
 
-                String codeGroup =
-                        ExcelUtils.getString(
+                String codeGroup
+                        = ExcelUtils.getString(
                                 row.getCell(4))
                                 .trim();
 
@@ -85,13 +77,11 @@ public class InspectionImportService {
                     continue;
                 }
 
-                LocalDate inspectionDate =
-                        getDate(
+                LocalDate inspectionDate
+                        = getDate(
                                 row.getCell(1));
 
                 if (inspectionDate == null) {
-
-                    
 
                     continue;
                 }
@@ -100,26 +90,18 @@ public class InspectionImportService {
                         .equals(measurement)
                         && value > 10) {
 
-                    measurement =
-                            "INTERNAL TEMPERATURE";
+                    measurement
+                            = "INTERNAL TEMPERATURE";
                 }
 
-                InspectionMeasurement
-                        inspectionMeasurement =
-                        new InspectionMeasurement(
-
+                InspectionMeasurement inspectionMeasurement
+                        = new InspectionMeasurement(
                                 equipmentId,
-
                                 inspectionDate,
-
                                 measurement,
-
                                 codeGroup,
-
                                 value
                         );
-
-                
 
                 repository.save(
                         inspectionMeasurement);
@@ -152,8 +134,8 @@ public class InspectionImportService {
                         .toLocalDate();
             }
 
-            String value =
-                    ExcelUtils.getString(
+            String value
+                    = ExcelUtils.getString(
                             cell)
                             .trim();
 
@@ -163,8 +145,8 @@ public class InspectionImportService {
 
             if (value.matches("\\d+")) {
 
-                double serial =
-                        Double.parseDouble(
+                double serial
+                        = Double.parseDouble(
                                 value);
 
                 return DateUtil
@@ -178,8 +160,6 @@ public class InspectionImportService {
                     DATE_FORMATTER);
 
         } catch (Exception ex) {
-
-            
 
             throw ex;
         }

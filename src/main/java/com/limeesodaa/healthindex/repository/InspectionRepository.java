@@ -32,81 +32,67 @@ public class InspectionRepository {
         """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(sql)) {
 
-                PreparedStatement statement =
-                        connection.prepareStatement(sql)
-        ) {
+            statement.setString(
+                    1,
+                    measurement.equipmentId());
 
-                statement.setString(
-                        1,
-                        measurement.equipmentId());
+            statement.setString(
+                    2,
+                    measurement.inspectionDate()
+                            .toString());
 
-                statement.setString(
-                        2,
-                        measurement.inspectionDate()
-                                .toString());
+            statement.setString(
+                    3,
+                    measurement.measurementName());
 
-                statement.setString(
-                        3,
-                        measurement.measurementName());
+            statement.setString(
+                    4,
+                    measurement.codeGroup());
 
-                statement.setString(
-                        4,
-                        measurement.codeGroup());
+            statement.setDouble(
+                    5,
+                    measurement.rawValue());
 
-                statement.setDouble(
-                        5,
-                        measurement.rawValue());
-
-        
             statement.executeUpdate();
         }
     }
 
     public List<InspectionMeasurement>
-    findAll()
+            findAll()
             throws SQLException {
 
-        List<InspectionMeasurement> results =
-                new ArrayList<>();
+        List<InspectionMeasurement> results
+                = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM inspection_measurement";
+        String sql
+                = "SELECT * FROM inspection_measurement";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement();
-
-                ResultSet rs =
-                        statement.executeQuery(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement(); ResultSet rs
+                = statement.executeQuery(sql)) {
 
             while (rs.next()) {
 
                 results.add(
-        new InspectionMeasurement(
-
-                rs.getString(
-                        "equipment_id"),
-
-                LocalDate.parse(
-                        rs.getString(
-                                "inspection_date")),
-
-                rs.getString(
-                        "measurement_name"),
-
-                rs.getString(
-                        "code_group"),
-
-                rs.getDouble(
-                        "measurement_value")
-        ));
+                        new InspectionMeasurement(
+                                rs.getString(
+                                        "equipment_id"),
+                                LocalDate.parse(
+                                        rs.getString(
+                                                "inspection_date")),
+                                rs.getString(
+                                        "measurement_name"),
+                                rs.getString(
+                                        "code_group"),
+                                rs.getDouble(
+                                        "measurement_value")
+                        ));
             }
         }
 
@@ -117,12 +103,9 @@ public class InspectionRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             statement.executeUpdate(
                     "DELETE FROM inspection_measurement");

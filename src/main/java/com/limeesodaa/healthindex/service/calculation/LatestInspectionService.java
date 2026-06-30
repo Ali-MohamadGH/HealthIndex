@@ -14,30 +14,23 @@ public class LatestInspectionService {
     public List<AssetInspection> getLatestInspections(
             List<InspectionMeasurement> measurements) {
 
-        Map<String,
-                Map<LocalDate,
-                        List<InspectionMeasurement>>>
-                grouped =
-
-                measurements.stream()
-
+        Map<String, Map<LocalDate, List<InspectionMeasurement>>> grouped
+                = measurements.stream()
                         .collect(
                                 Collectors.groupingBy(
                                         InspectionMeasurement::equipmentId,
-
                                         Collectors.groupingBy(
                                                 InspectionMeasurement::inspectionDate
                                         )));
 
-        List<AssetInspection> inspections =
-                new ArrayList<>();
+        List<AssetInspection> inspections
+                = new ArrayList<>();
 
-        for (String equipment :
-                grouped.keySet()) {
+        for (String equipment
+                : grouped.keySet()) {
 
-            LocalDate latestDate =
-
-                    grouped.get(equipment)
+            LocalDate latestDate
+                    = grouped.get(equipment)
                             .keySet()
                             .stream()
                             .max(LocalDate::compareTo)
@@ -47,24 +40,15 @@ public class LatestInspectionService {
                 continue;
             }
 
-            List<InspectionMeasurement>
-                    latestMeasurements =
-
-                    new ArrayList<>(
-
+            List<InspectionMeasurement> latestMeasurements
+                    = new ArrayList<>(
                             grouped.get(equipment)
                                     .get(latestDate));
 
-            
-
             inspections.add(
-
                     new AssetInspection(
-
                             equipment,
-
                             latestDate,
-
                             latestMeasurements));
         }
 

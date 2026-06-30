@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public final class DatabaseManager {
 
-    private static final String DATABASE_URL =
-            "jdbc:sqlite:health-index.db";
+    private static final String DATABASE_URL
+            = "jdbc:sqlite:health-index.db";
 
     private DatabaseManager() {
     }

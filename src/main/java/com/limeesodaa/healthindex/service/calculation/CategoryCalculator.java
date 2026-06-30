@@ -10,44 +10,32 @@ import com.limeesodaa.healthindex.model.WeightRule;
 
 public class CategoryCalculator {
 
-    private final CategorySetCalculator
-            setCalculator;
+    private final CategorySetCalculator setCalculator;
 
     public CategoryCalculator(
             ConversionService conversionService) {
 
-        setCalculator =
-                new CategorySetCalculator(
+        setCalculator
+                = new CategorySetCalculator(
                         conversionService);
     }
 
     public double calculate(
-
             String equipmentId,
-
             String category,
-
             List<CategoryRule> categoryRules,
-
             List<WeightRule> weightRules,
+            List<InspectionMeasurement> measurements) {
 
-            List<InspectionMeasurement>
-                    measurements) {
-
-        boolean debug =
-
-                "20118162".equals(
+        boolean debug
+                = "20118162".equals(
                         equipmentId);
 
-        Map<String, List<CategoryRule>>
-                categorySets =
-
-                categoryRules.stream()
-
-                        .filter(rule ->
-                                category.equalsIgnoreCase(
-                                        rule.category()))
-
+        Map<String, List<CategoryRule>> categorySets
+                = categoryRules.stream()
+                        .filter(rule
+                                -> category.equalsIgnoreCase(
+                                rule.category()))
                         .collect(
                                 Collectors.groupingBy(
                                         CategoryRule::categorySet));
@@ -74,28 +62,23 @@ public class CategoryCalculator {
                     "======================================");
         }
 
-        for (var entry :
-                categorySets.entrySet()) {
+        for (var entry
+                : categorySets.entrySet()) {
 
-            String categorySet =
-                    entry.getKey();
+            String categorySet
+                    = entry.getKey();
 
-            List<CategoryRule> setRules =
-                    entry.getValue();
+            List<CategoryRule> setRules
+                    = entry.getValue();
 
-            boolean hasMeasurement =
-
-                    setRules.stream()
-
-                            .anyMatch(rule ->
-
-                                    measurements.stream()
-
-                                            .anyMatch(m ->
-
-                                                    m.measurementName()
-                                                            .equalsIgnoreCase(
-                                                                    rule.measurementName())));
+            boolean hasMeasurement
+                    = setRules.stream()
+                            .anyMatch(rule
+                                    -> measurements.stream()
+                                    .anyMatch(m
+                                            -> m.measurementName()
+                                            .equalsIgnoreCase(
+                                                    rule.measurementName())));
 
             if (!hasMeasurement) {
 
@@ -109,44 +92,30 @@ public class CategoryCalculator {
                 continue;
             }
 
-            double setScore =
+            double setScore
+                    = setCalculator.calculate(
+                            equipmentId,
+                            setRules,
+                            measurements);
 
-                   
-setCalculator.calculate(
+            double setWeight
+                    = weightRules.stream()
+                            .filter(weight
+                                    -> category.equalsIgnoreCase(
+                                    weight.category())
 
-                equipmentId,
-
-                setRules,
-
-                measurements);
-
-
-            double setWeight =
-
-                    weightRules.stream()
-
-                            .filter(weight ->
-
-                                    category.equalsIgnoreCase(
-                                            weight.category())
-
-                                    &&
-
-                                    categorySet.equalsIgnoreCase(
-                                            weight.categorySet()))
-
+                            && categorySet.equalsIgnoreCase(
+                                    weight.categorySet()))
                             .findFirst()
-
                             .map(
                                     WeightRule::setWeight)
-
                             .orElse(0.0);
 
-            weightedScoreTotal +=
-                    setScore * setWeight;
+            weightedScoreTotal
+                    += setScore * setWeight;
 
-            availableWeightTotal +=
-                    setWeight;
+            availableWeightTotal
+                    += setWeight;
 
             if (debug) {
 
@@ -166,14 +135,11 @@ setCalculator.calculate(
             }
         }
 
-        double categoryScore =
-
-                availableWeightTotal == 0
-
+        double categoryScore
+                = availableWeightTotal == 0
                         ? 0
-
                         : weightedScoreTotal
-                                / availableWeightTotal;
+                        / availableWeightTotal;
 
         if (debug) {
 

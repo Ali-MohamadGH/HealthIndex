@@ -28,12 +28,9 @@ public class WeightRepository {
             """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(sql)) {
 
             statement.setString(
                     1,
@@ -58,37 +55,28 @@ public class WeightRepository {
     public List<WeightRule> findAll()
             throws SQLException {
 
-        List<WeightRule> results =
-                new ArrayList<>();
+        List<WeightRule> results
+                = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM zhyd_hlth_weight";
+        String sql
+                = "SELECT * FROM zhyd_hlth_weight";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement();
-
-                ResultSet rs =
-                        statement.executeQuery(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement(); ResultSet rs
+                = statement.executeQuery(sql)) {
 
             while (rs.next()) {
 
                 results.add(
                         new WeightRule(
-
                                 rs.getString(
                                         "category"),
-
                                 rs.getString(
                                         "category_set"),
-
                                 rs.getDouble(
                                         "category_weight"),
-
                                 rs.getDouble(
                                         "set_weight")
                         ));
@@ -102,12 +90,9 @@ public class WeightRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             statement.executeUpdate(
                     "DELETE FROM zhyd_hlth_weight");

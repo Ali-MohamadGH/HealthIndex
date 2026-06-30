@@ -1,4 +1,5 @@
 package com.limeesodaa.healthindex.service.imports;
+
 import java.io.File;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -11,9 +12,8 @@ import com.limeesodaa.healthindex.repository.ConversionRepository;
 
 public class ConversionImportService {
 
-    private final ConversionRepository
-            repository =
-            new ConversionRepository();
+    private final ConversionRepository repository
+            = new ConversionRepository();
 
     public void importFile(
             File file)
@@ -21,34 +21,31 @@ public class ConversionImportService {
 
         repository.deleteAll();
 
-        try (Workbook workbook =
-                     WorkbookFactory.create(
-                             file)) {
+        try (Workbook workbook
+                = WorkbookFactory.create(
+                        file)) {
 
-            Sheet sheet =
-                    workbook.getSheetAt(0);
+            Sheet sheet
+                    = workbook.getSheetAt(0);
 
             for (int rowIndex = 1;
-                 rowIndex <= sheet.getLastRowNum();
-                 rowIndex++) {
+                    rowIndex <= sheet.getLastRowNum();
+                    rowIndex++) {
 
-                Row row =
-                        sheet.getRow(
+                Row row
+                        = sheet.getRow(
                                 rowIndex);
 
                 if (row == null) {
                     continue;
                 }
 
-                ConversionRule rule =
-                        new ConversionRule(
-
+                ConversionRule rule
+                        = new ConversionRule(
                                 row.getCell(0)
                                         .getStringCellValue(),
-
                                 row.getCell(1)
                                         .getNumericCellValue(),
-
                                 row.getCell(2)
                                         .getNumericCellValue()
                         );

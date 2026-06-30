@@ -15,48 +15,38 @@ import com.limeesodaa.healthindex.model.WeightRule;
 
 public class HealthIndexCalculator {
 
-    private final CategoryCalculator
-            categoryCalculator;
+    private final CategoryCalculator categoryCalculator;
 
-    private final GatewayFailureService
-        gatewayFailureService;
+    private final GatewayFailureService gatewayFailureService;
 
     public HealthIndexCalculator(
-            List<ConversionRule>
-                    conversionRules) {
+            List<ConversionRule> conversionRules) {
 
-        ConversionService
-                conversionService =
-                new ConversionService(
+        ConversionService conversionService
+                = new ConversionService(
                         conversionRules);
 
-        categoryCalculator =
-                new CategoryCalculator(
+        categoryCalculator
+                = new CategoryCalculator(
                         conversionService);
-        
-        gatewayFailureService =
-                new GatewayFailureService(
+
+        gatewayFailureService
+                = new GatewayFailureService(
                         conversionService);
 
     }
 
     public HealthIndexResult calculate(
-
             AssetInspection inspection,
-
             List<CategoryRule> categoryRules,
-
             List<WeightRule> weightRules) {
 
-        boolean debug =
-
-                "20118162".equals(
+        boolean debug
+                = "20118162".equals(
                         inspection.equipmentId());
 
-        List<InspectionMeasurement>
-                latestMeasurements =
-
-                getLatestMeasurements(
+        List<InspectionMeasurement> latestMeasurements
+                = getLatestMeasurements(
                         inspection.measurements());
 
         if (debug) {
@@ -80,54 +70,38 @@ public class HealthIndexCalculator {
             System.out.println(
                     "Measurements Used:");
 
-            latestMeasurements.forEach(m ->
-
-                    System.out.println(
-
+            latestMeasurements.forEach(m
+                    -> System.out.println(
                             m.measurementName()
-
-                                    + " | "
-
-                                    + m.inspectionDate()
-
-                                    + " | "
-
-                                    + m.rawValue()));
+                            + " | "
+                            + m.inspectionDate()
+                            + " | "
+                            + m.rawValue()));
         }
 
-        Set<String> categories =
-
-                categoryRules.stream()
-
+        Set<String> categories
+                = categoryRules.stream()
                         .map(
                                 CategoryRule::category)
-
                         .collect(
                                 Collectors.toSet());
 
-        Map<String, Double>
-                categoryScores =
-                new HashMap<>();
+        Map<String, Double> categoryScores
+                = new HashMap<>();
 
         double weightedCategoryTotal = 0;
 
         double availableCategoryWeight = 0;
 
-        for (String category :
-                categories) {
+        for (String category
+                : categories) {
 
-            double categoryScore =
-
-                    categoryCalculator.calculate(
-
+            double categoryScore
+                    = categoryCalculator.calculate(
                             inspection.equipmentId(),
-
                             category,
-
                             categoryRules,
-
                             weightRules,
-
                             latestMeasurements);
 
             categoryScores.put(
@@ -138,27 +112,22 @@ public class HealthIndexCalculator {
                 continue;
             }
 
-            double categoryWeight =
-
-                    weightRules.stream()
-
-                            .filter(weight ->
-                                    category.equalsIgnoreCase(
-                                            weight.category()))
-
+            double categoryWeight
+                    = weightRules.stream()
+                            .filter(weight
+                                    -> category.equalsIgnoreCase(
+                                    weight.category()))
                             .findFirst()
-
                             .map(
                                     WeightRule::categoryWeight)
-
                             .orElse(0.0);
 
-            weightedCategoryTotal +=
-                    categoryScore
-                            * categoryWeight;
+            weightedCategoryTotal
+                    += categoryScore
+                    * categoryWeight;
 
-            availableCategoryWeight +=
-                    categoryWeight;
+            availableCategoryWeight
+                    += categoryWeight;
 
             if (debug) {
 
@@ -178,69 +147,46 @@ public class HealthIndexCalculator {
             }
         }
 
-        double healthIndex =
-
-                availableCategoryWeight == 0
-
+        double healthIndex
+                = availableCategoryWeight == 0
                         ? 0
-
                         : weightedCategoryTotal
-                                / availableCategoryWeight;
+                        / availableCategoryWeight;
 
-        boolean gatewayFail =
-
-                gatewayFailureService.evaluate(
-
+        boolean gatewayFail
+                = gatewayFailureService.evaluate(
                         categoryRules,
-
                         latestMeasurements);
 
         boolean realgatewayfail;
         realgatewayfail = gatewayFail != true;
 
         return new HealthIndexResult(
-
                 inspection.equipmentId(),
-
                 inspection.inspectionDate(),
-
                 healthIndex,
-
                 categoryScores,
-
                 realgatewayfail);
     }
 
     private List<InspectionMeasurement>
-    getLatestMeasurements(
-
-            List<InspectionMeasurement>
-                    measurements) {
+            getLatestMeasurements(
+                    List<InspectionMeasurement> measurements) {
 
         return measurements.stream()
-
                 .collect(
                         Collectors.toMap(
-
                                 InspectionMeasurement::measurementName,
-
-                                measurement ->
-                                        measurement,
-
-                                (a, b) ->
-
-                                        a.inspectionDate()
-                                                .isAfter(
-                                                        b.inspectionDate())
-
-                                        ? a
-
-                                        : b))
-
+                                measurement
+                                -> measurement,
+                                (a, b)
+                                -> a.inspectionDate()
+                                        .isAfter(
+                                                b.inspectionDate())
+                                ? a
+                                : b))
                 .values()
-
                 .stream()
-
                 .toList();
     }
 }

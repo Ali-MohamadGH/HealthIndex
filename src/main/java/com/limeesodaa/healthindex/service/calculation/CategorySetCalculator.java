@@ -4,29 +4,25 @@ import java.util.List;
 
 import com.limeesodaa.healthindex.model.CategoryRule;
 import com.limeesodaa.healthindex.model.InspectionMeasurement;
+
 public class CategorySetCalculator {
 
-    private final ConversionService
-            conversionService;
+    private final ConversionService conversionService;
 
     public CategorySetCalculator(
             ConversionService conversionService) {
 
-        this.conversionService =
-                conversionService;
+        this.conversionService
+                = conversionService;
     }
 
     public double calculate(
-
             String equipmentId,
-
             List<CategoryRule> rules,
+            List<InspectionMeasurement> measurements) {
 
-            List<InspectionMeasurement>
-                    measurements) {
-
-        boolean debug =
-                "20118162".equals(
+        boolean debug
+                = "20118162".equals(
                         equipmentId);
 
         double actualTotal = 0;
@@ -54,21 +50,16 @@ public class CategorySetCalculator {
                     "#################################");
         }
 
-        for (CategoryRule rule :
-                rules) {
+        for (CategoryRule rule
+                : rules) {
 
-            InspectionMeasurement measurement =
-
-                    measurements.stream()
-
-                            .filter(m ->
-
-                                    m.measurementName()
-                                            .equalsIgnoreCase(
-                                                    rule.measurementName()))
-
+            InspectionMeasurement measurement
+                    = measurements.stream()
+                            .filter(m
+                                    -> m.measurementName()
+                                    .equalsIgnoreCase(
+                                            rule.measurementName()))
                             .findFirst()
-
                             .orElse(null);
 
             if (measurement == null) {
@@ -83,23 +74,20 @@ public class CategorySetCalculator {
                 continue;
             }
 
-            double convertedValue =
-
-                    conversionService.convert(
-
+            double convertedValue
+                    = conversionService.convert(
                             measurement.codeGroup(),
-
                             measurement.rawValue());
-                        
-if (measurement.rawValue() == -1 || measurement.rawValue()>5) {
-    continue;
-}
 
-            actualTotal +=
-                    convertedValue;
+            if (measurement.rawValue() == -1 || measurement.rawValue() > 5) {
+                continue;
+            }
 
-            maximumTotal +=
-                    rule.maximumValue();
+            actualTotal
+                    += convertedValue;
+
+            maximumTotal
+                    += rule.maximumValue();
 
             if (debug) {
 
@@ -138,14 +126,11 @@ if (measurement.rawValue() == -1 || measurement.rawValue()>5) {
             }
         }
 
-        double setScore =
-
-                maximumTotal == 0
-
+        double setScore
+                = maximumTotal == 0
                         ? 0
-
                         : actualTotal
-                                / maximumTotal;
+                        / maximumTotal;
 
         if (debug) {
 
