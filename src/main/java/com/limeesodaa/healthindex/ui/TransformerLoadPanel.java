@@ -23,21 +23,18 @@ public class TransformerLoadPanel extends JPanel {
 
     private final DefaultTableModel model;
 
-    private final TransformerLoadRepository repository =
-            new TransformerLoadRepository();
+    private final TransformerLoadRepository repository
+            = new TransformerLoadRepository();
 
     public TransformerLoadPanel() {
-         Color bl = Color.decode("#023C6B");
+        Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-       
-     
+
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-   
-     
+
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
-        
 
         setBorder(blBorder);
         setLayout(new BorderLayout());
@@ -46,9 +43,9 @@ public class TransformerLoadPanel extends JPanel {
 
         model = new DefaultTableModel(
                 new String[]{
-                        "Equipment",
-                        "Load Date",
-                        "Loading Score"
+                    "Equipment",
+                    "Load Date",
+                    "Loading Score"
                 },
                 0);
 
@@ -69,27 +66,24 @@ public class TransformerLoadPanel extends JPanel {
         refreshButton.addActionListener(
                 e -> loadData());
 
-        JPanel top =
-                new JPanel();
+        JPanel top
+                = new JPanel();
 
         top.add(importButton);
         top.add(refreshButton);
 
         importButton.setForeground(wh);
         importButton.setFont(font);
-   
-        
+
         refreshButton.setForeground(wh);
         refreshButton.setFont(font);
 
         header.setBackground(bl);
         header.setForeground(wh);
         //header.setBorder(grBorder);
-        
+
         top.setBackground(bl);
-        
-        
-       
+
         top.add(importButton);
         top.add(refreshButton);
         add(top, BorderLayout.NORTH);
@@ -99,8 +93,8 @@ public class TransformerLoadPanel extends JPanel {
 
     private void importData() {
 
-        JFileChooser chooser =
-                new JFileChooser();
+        JFileChooser chooser
+                = new JFileChooser();
 
         if (chooser.showOpenDialog(this)
                 != JFileChooser.APPROVE_OPTION) {
@@ -129,21 +123,19 @@ public class TransformerLoadPanel extends JPanel {
 
             model.setRowCount(0);
 
-            for (TransformerLoad load :
-                    repository.findAll()) {
+            for (TransformerLoad load
+                    : repository.findAll()) {
 
                 model.addRow(
                         new Object[]{
-
-                                load.equipmentId(),
-                                load.loadDate(),
-                                load.loadingScore()
+                            load.equipmentId(),
+                            load.loadDate(),
+                            load.loadingScore()
                         });
             }
 
         } catch (SQLException ex) {
 
-            
         }
     }
 }

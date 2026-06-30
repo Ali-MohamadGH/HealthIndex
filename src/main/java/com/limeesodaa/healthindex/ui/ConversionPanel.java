@@ -20,23 +20,21 @@ import com.limeesodaa.healthindex.repository.ConversionRepository;
 import com.limeesodaa.healthindex.service.imports.ConversionImportService;
 
 public class ConversionPanel extends JPanel {
-        
+
     private final DefaultTableModel model;
 
-    private final ConversionRepository repository =
-            new ConversionRepository();
+    private final ConversionRepository repository
+            = new ConversionRepository();
 
     public ConversionPanel() {
         Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
 
-     
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-      
+
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
-        
 
         setBorder(blBorder);
         setLayout(new BorderLayout());
@@ -46,9 +44,9 @@ public class ConversionPanel extends JPanel {
 
         model = new DefaultTableModel(
                 new String[]{
-                        "Code Group",
-                        "Source Value",
-                        "Converted Value"
+                    "Code Group",
+                    "Source Value",
+                    "Converted Value"
                 },
                 0
         );
@@ -72,22 +70,19 @@ public class ConversionPanel extends JPanel {
                 e -> loadData());
 
         JPanel top = new JPanel();
-        
+
         importButton.setForeground(wh);
         importButton.setFont(font);
-   
-        
+
         refreshButton.setForeground(wh);
         refreshButton.setFont(font);
 
         header.setBackground(bl);
         header.setForeground(wh);
         //header.setBorder(grBorder);
-        
+
         top.setBackground(bl);
-        
-        
-        
+
         top.add(importButton);
         top.add(refreshButton);
         top.add(importButton);
@@ -102,8 +97,8 @@ public class ConversionPanel extends JPanel {
 
     private void importData() {
 
-        JFileChooser chooser =
-                new JFileChooser();
+        JFileChooser chooser
+                = new JFileChooser();
 
         if (chooser.showOpenDialog(this)
                 != JFileChooser.APPROVE_OPTION) {
@@ -133,23 +128,19 @@ public class ConversionPanel extends JPanel {
 
             model.setRowCount(0);
 
-            for (ConversionRule rule :
-                    repository.findAll()) {
+            for (ConversionRule rule
+                    : repository.findAll()) {
 
                 model.addRow(
                         new Object[]{
-
-                                rule.codeGroup(),
-
-                                rule.sourceValue(),
-
-                                rule.convertedValue()
+                            rule.codeGroup(),
+                            rule.sourceValue(),
+                            rule.convertedValue()
                         });
             }
 
         } catch (SQLException ex) {
 
-            
         }
     }
 }

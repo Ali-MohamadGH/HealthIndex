@@ -14,8 +14,8 @@ import com.limeesodaa.healthindex.repository.CategoryRepository;
 
 public class CategoryImportService {
 
-    private final CategoryRepository repository =
-            new CategoryRepository();
+    private final CategoryRepository repository
+            = new CategoryRepository();
 
     public ImportResult importFile(
             File file)
@@ -27,14 +27,13 @@ public class CategoryImportService {
         int imported = 0;
 
         try (
-                Workbook workbook =
-                        new XSSFWorkbook(
-                                new FileInputStream(
-                                        file))
-        ) {
+                Workbook workbook
+                = new XSSFWorkbook(
+                        new FileInputStream(
+                                file))) {
 
-            Sheet sheet =
-                    workbook.getSheetAt(0);
+            Sheet sheet
+                    = workbook.getSheetAt(0);
 
             boolean header = true;
 
@@ -47,29 +46,21 @@ public class CategoryImportService {
 
                 read++;
 
-                CategoryRule rule =
-                        new CategoryRule(
-
+                CategoryRule rule
+                        = new CategoryRule(
                                 ExcelUtils.getString(
                                         row.getCell(0)),
-
                                 ExcelUtils.getString(
                                         row.getCell(1)),
-
                                 ExcelUtils.getString(
                                         row.getCell(2)),
-
                                 ExcelUtils.getDouble(
                                         row.getCell(3)),
                                 ExcelUtils.getDouble(
                                         row.getCell(4)),
-
                                 "1".equals(
                                         ExcelUtils.getString(
                                                 row.getCell(5)))
-                                                
-                                
-                                                
                         );
 
                 repository.save(rule);

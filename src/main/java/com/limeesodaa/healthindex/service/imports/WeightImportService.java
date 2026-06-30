@@ -14,8 +14,8 @@ import com.limeesodaa.healthindex.repository.WeightRepository;
 
 public class WeightImportService {
 
-    private final WeightRepository repository =
-            new WeightRepository();
+    private final WeightRepository repository
+            = new WeightRepository();
 
     public ImportResult importFile(
             File file)
@@ -27,13 +27,12 @@ public class WeightImportService {
         int imported = 0;
 
         try (
-                Workbook workbook =
-                        new XSSFWorkbook(
-                                new FileInputStream(file))
-        ) {
+                Workbook workbook
+                = new XSSFWorkbook(
+                        new FileInputStream(file))) {
 
-            Sheet sheet =
-                    workbook.getSheetAt(0);
+            Sheet sheet
+                    = workbook.getSheetAt(0);
 
             boolean header = true;
 
@@ -46,18 +45,14 @@ public class WeightImportService {
 
                 read++;
 
-                WeightRule rule =
-                        new WeightRule(
-
+                WeightRule rule
+                        = new WeightRule(
                                 ExcelUtils.getString(
                                         row.getCell(0)),
-
                                 ExcelUtils.getString(
                                         row.getCell(1)),
-
                                 ExcelUtils.getDouble(
                                         row.getCell(2)),
-
                                 ExcelUtils.getDouble(
                                         row.getCell(3))
                         );

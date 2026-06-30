@@ -15,8 +15,8 @@ import com.limeesodaa.healthindex.repository.TransformerLoadRepository;
 
 public class TransformerLoadImportService {
 
-    private final TransformerLoadRepository repository =
-            new TransformerLoadRepository();
+    private final TransformerLoadRepository repository
+            = new TransformerLoadRepository();
 
     public ImportResult importFile(
             File file)
@@ -28,13 +28,12 @@ public class TransformerLoadImportService {
         int imported = 0;
 
         try (
-                Workbook workbook =
-                        new XSSFWorkbook(
-                                new FileInputStream(file))
-        ) {
+                Workbook workbook
+                = new XSSFWorkbook(
+                        new FileInputStream(file))) {
 
-            Sheet sheet =
-                    workbook.getSheetAt(0);
+            Sheet sheet
+                    = workbook.getSheetAt(0);
 
             boolean header = true;
 
@@ -47,26 +46,23 @@ public class TransformerLoadImportService {
 
                 read++;
 
-                String equipment =
-                        ExcelUtils.getString(
+                String equipment
+                        = ExcelUtils.getString(
                                 row.getCell(0));
 
-                double score =
-                        ExcelUtils.getDouble(
+                double score
+                        = ExcelUtils.getDouble(
                                 row.getCell(2));
 
-                String dateText =
-                        ExcelUtils.getString(
+                String dateText
+                        = ExcelUtils.getString(
                                 row.getCell(3));
 
-                TransformerLoad load =
-                        new TransformerLoad(
-
+                TransformerLoad load
+                        = new TransformerLoad(
                                 equipment,
-
                                 LocalDate.parse(
                                         dateText),
-
                                 score
                         );
 

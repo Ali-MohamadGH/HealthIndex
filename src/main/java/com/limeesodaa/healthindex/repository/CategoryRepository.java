@@ -30,12 +30,9 @@ public class CategoryRepository {
             """;
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                PreparedStatement statement =
-                        connection.prepareStatement(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); PreparedStatement statement
+                = connection.prepareStatement(sql)) {
 
             statement.setString(
                     1,
@@ -56,7 +53,7 @@ public class CategoryRepository {
             statement.setDouble(
                     5,
                     rule.gatewayTestValue());
-                statement.setBoolean(6, rule.gatewayFail());
+            statement.setBoolean(6, rule.gatewayFail());
             statement.executeUpdate();
         }
     }
@@ -64,45 +61,34 @@ public class CategoryRepository {
     public List<CategoryRule> findAll()
             throws SQLException {
 
-        List<CategoryRule> results =
-                new ArrayList<>();
+        List<CategoryRule> results
+                = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM zhyd_hlth_categ";
+        String sql
+                = "SELECT * FROM zhyd_hlth_categ";
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement();
-
-                ResultSet rs =
-                        statement.executeQuery(sql)
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement(); ResultSet rs
+                = statement.executeQuery(sql)) {
 
             while (rs.next()) {
 
                 results.add(
                         new CategoryRule(
-
                                 rs.getString(
                                         "measurement_name"),
-
                                 rs.getString(
                                         "category"),
-
                                 rs.getString(
                                         "category_set"),
-
                                 rs.getDouble(
                                         "maximum_value"),
-                                
                                 rs.getDouble("gateway_test_value"),
                                 rs.getBoolean(
                                         "gateway_fail")
-                                        
-                ));
+                        ));
             }
         }
 
@@ -113,12 +99,9 @@ public class CategoryRepository {
             throws SQLException {
 
         try (
-                Connection connection =
-                        DatabaseManager.getConnection();
-
-                Statement statement =
-                        connection.createStatement()
-        ) {
+                Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             statement.executeUpdate(
                     "DELETE FROM zhyd_hlth_categ");

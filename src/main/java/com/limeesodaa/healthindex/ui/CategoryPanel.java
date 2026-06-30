@@ -23,21 +23,18 @@ public class CategoryPanel extends JPanel {
 
     private final DefaultTableModel model;
 
-    private final CategoryRepository repository =
-            new CategoryRepository();
+    private final CategoryRepository repository
+            = new CategoryRepository();
 
     public CategoryPanel() {
         Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-    
-       
+
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-  
-     
+
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
-        
 
         setBorder(blBorder);
         setLayout(new BorderLayout());
@@ -45,12 +42,12 @@ public class CategoryPanel extends JPanel {
         setForeground(wh);
         model = new DefaultTableModel(
                 new String[]{
-                        "Measurement",
-                        "Category",
-                        "Category Set",
-                        "Maximum",
-                        "Gateway Fail Test Value",
-                        "Gateway Indicator"
+                    "Measurement",
+                    "Category",
+                    "Category Set",
+                    "Maximum",
+                    "Gateway Fail Test Value",
+                    "Gateway Indicator"
                 },
                 0
         );
@@ -59,12 +56,10 @@ public class CategoryPanel extends JPanel {
         JTableHeader header = table.getTableHeader();
         table.setAutoCreateRowSorter(true);
 
-        add(new JScrollPane(table),BorderLayout.CENTER);
+        add(new JScrollPane(table), BorderLayout.CENTER);
 
         GradientButton importButton = new GradientButton(" Import ", b1, b2);
         GradientButton refreshButton = new GradientButton(" Refresh ", b1, b2);
-
-       
 
         importButton.addActionListener(
                 e -> importData());
@@ -73,27 +68,22 @@ public class CategoryPanel extends JPanel {
                 e -> loadData());
 
         JPanel top = new JPanel();
-        
+
         importButton.setForeground(wh);
         importButton.setFont(font);
-   
-        
+
         refreshButton.setForeground(wh);
         refreshButton.setFont(font);
 
         header.setBackground(bl);
         header.setForeground(wh);
         //header.setBorder(grBorder);
-        
-        top.setBackground(bl);
-        
-        
-        //table.setBackground(b1);
 
-        
+        top.setBackground(bl);
+
+        //table.setBackground(b1);
         top.add(importButton);
         top.add(refreshButton);
-       
 
         add(top, BorderLayout.NORTH);
 
@@ -102,8 +92,8 @@ public class CategoryPanel extends JPanel {
 
     private void importData() {
 
-        JFileChooser chooser =
-                new JFileChooser();
+        JFileChooser chooser
+                = new JFileChooser();
 
         if (chooser.showOpenDialog(this)
                 != JFileChooser.APPROVE_OPTION) {
@@ -132,17 +122,16 @@ public class CategoryPanel extends JPanel {
 
             model.setRowCount(0);
 
-            for (CategoryRule rule :
-                    repository.findAll()) {
+            for (CategoryRule rule
+                    : repository.findAll()) {
 
                 model.addRow(new Object[]{
-
-                        rule.measurementName(),
-                        rule.category(),
-                        rule.categorySet(),
-                        rule.maximumValue(),
-                        rule.gatewayTestValue(),
-                        rule.gatewayFail()
+                    rule.measurementName(),
+                    rule.category(),
+                    rule.categorySet(),
+                    rule.maximumValue(),
+                    rule.gatewayTestValue(),
+                    rule.gatewayFail()
                 });
             }
 

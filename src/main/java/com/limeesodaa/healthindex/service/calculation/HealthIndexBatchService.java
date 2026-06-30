@@ -18,90 +18,68 @@ import com.limeesodaa.healthindex.repository.WeightRepository;
 
 public class HealthIndexBatchService {
 
-    private final InspectionRepository
-            inspectionRepository =
-            new InspectionRepository();
+    private final InspectionRepository inspectionRepository
+            = new InspectionRepository();
 
-    private final CategoryRepository
-            categoryRepository =
-            new CategoryRepository();
+    private final CategoryRepository categoryRepository
+            = new CategoryRepository();
 
-    private final WeightRepository
-            weightRepository =
-            new WeightRepository();
+    private final WeightRepository weightRepository
+            = new WeightRepository();
 
-    private final ConversionRepository
-            conversionRepository =
-            new ConversionRepository();
+    private final ConversionRepository conversionRepository
+            = new ConversionRepository();
 
-    private final HealthIndexResultRepository
-            resultRepository =
-            new HealthIndexResultRepository();
+    private final HealthIndexResultRepository resultRepository
+            = new HealthIndexResultRepository();
 
-    private final LatestInspectionService
-            latestInspectionService =
-            new LatestInspectionService();
+    private final LatestInspectionService latestInspectionService
+            = new LatestInspectionService();
 
     public List<HealthIndexResult>
-    calculateAll(Consumer<String> logger)
+            calculateAll(Consumer<String> logger)
             throws Exception {
 
-        List<InspectionMeasurement>
-                measurements =
-                inspectionRepository.findAll();
+        List<InspectionMeasurement> measurements
+                = inspectionRepository.findAll();
 
-        List<AssetInspection>
-                inspections =
-
-                latestInspectionService
+        List<AssetInspection> inspections
+                = latestInspectionService
                         .getLatestInspections(
                                 measurements);
 
-        List<CategoryRule>
-                categoryRules =
+        List<CategoryRule> categoryRules
+                = categoryRepository.findAll();
 
-                categoryRepository.findAll();
+        List<WeightRule> weightRules
+                = weightRepository.findAll();
 
-        List<WeightRule>
-                weightRules =
+        List<ConversionRule> conversionRules
+                = conversionRepository.findAll();
 
-                weightRepository.findAll();
-
-        List<ConversionRule>
-                conversionRules =
-
-                conversionRepository.findAll();
-
-        HealthIndexCalculator
-                calculator =
-
-                new HealthIndexCalculator(
+        HealthIndexCalculator calculator
+                = new HealthIndexCalculator(
                         conversionRules);
 
-        List<HealthIndexResult>
-                results =
-                new ArrayList<>();
+        List<HealthIndexResult> results
+                = new ArrayList<>();
 
         for (AssetInspection inspection
                 : inspections) {
 
-            HealthIndexResult result =
-
-                    calculator.calculate(
-
+            HealthIndexResult result
+                    = calculator.calculate(
                             inspection,
-
                             categoryRules,
-
                             weightRules);
 
             resultRepository.save(
                     result);
-                
-                logger.accept(
-                   "Calculating "
-                 + inspection.equipmentId()
-                 + "...\n");
+
+            logger.accept(
+                    "Calculating "
+                    + inspection.equipmentId()
+                    + "...\n");
 
             results.add(result);
         }

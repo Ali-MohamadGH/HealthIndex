@@ -23,20 +23,18 @@ public class WeightPanel extends JPanel {
 
     private final DefaultTableModel model;
 
-    private final WeightRepository repository =
-            new WeightRepository();
+    private final WeightRepository repository
+            = new WeightRepository();
 
     public WeightPanel() {
-       Color bl = Color.decode("#023C6B");
+        Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-        
-        
+
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-        
+
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
-        
 
         setBorder(blBorder);
         setLayout(new BorderLayout());
@@ -45,10 +43,10 @@ public class WeightPanel extends JPanel {
 
         model = new DefaultTableModel(
                 new String[]{
-                        "Category",
-                        "Category Set",
-                        "Category Weight",
-                        "Set Weight"
+                    "Category",
+                    "Category Set",
+                    "Category Weight",
+                    "Set Weight"
                 },
                 0);
 
@@ -63,35 +61,30 @@ public class WeightPanel extends JPanel {
         GradientButton importButton = new GradientButton(" Import ", b1, b2);
         GradientButton refreshButton = new GradientButton(" Refresh ", b1, b2);
 
-
         importButton.addActionListener(
                 e -> importData());
 
         refreshButton.addActionListener(
                 e -> loadData());
 
-        JPanel top =
-                new JPanel();
+        JPanel top
+                = new JPanel();
 
         top.add(importButton);
         top.add(refreshButton);
-        
-        
+
         importButton.setForeground(wh);
         importButton.setFont(font);
-   
-        
+
         refreshButton.setForeground(wh);
         refreshButton.setFont(font);
 
         header.setBackground(bl);
         header.setForeground(wh);
         //header.setBorder(grBorder);
-        
+
         top.setBackground(bl);
-        
-        
-        
+
         top.add(importButton);
         top.add(refreshButton);
         add(top, BorderLayout.NORTH);
@@ -101,8 +94,8 @@ public class WeightPanel extends JPanel {
 
     private void importData() {
 
-        JFileChooser chooser =
-                new JFileChooser();
+        JFileChooser chooser
+                = new JFileChooser();
 
         if (chooser.showOpenDialog(this)
                 != JFileChooser.APPROVE_OPTION) {
@@ -131,19 +124,19 @@ public class WeightPanel extends JPanel {
 
             model.setRowCount(0);
 
-            for (WeightRule rule :
-                    repository.findAll()) {
+            for (WeightRule rule
+                    : repository.findAll()) {
 
                 model.addRow(
                         new Object[]{
-
-                                rule.category(),
-                                rule.categorySet(),
-                                rule.categoryWeight(),
-                                rule.setWeight()
+                            rule.category(),
+                            rule.categorySet(),
+                            rule.categoryWeight(),
+                            rule.setWeight()
                         });
             }
 
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+        }
     }
 }

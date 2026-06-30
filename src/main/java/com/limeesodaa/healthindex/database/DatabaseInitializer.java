@@ -9,11 +9,9 @@ public class DatabaseInitializer {
     public void initialize()
             throws SQLException {
 
-        try (Connection connection =
-                     DatabaseManager.getConnection();
-
-             Statement statement =
-                     connection.createStatement()) {
+        try (Connection connection
+                = DatabaseManager.getConnection(); Statement statement
+                = connection.createStatement()) {
 
             createCategoryTable(statement);
 
@@ -157,10 +155,10 @@ public class DatabaseInitializer {
     }
 
     private void createHealthIndexResultTable(
-        Statement statement)
-        throws SQLException {
+            Statement statement)
+            throws SQLException {
 
-    statement.execute("""
+        statement.execute("""
 
             CREATE TABLE IF NOT EXISTS
             health_index_result (
@@ -185,7 +183,7 @@ public class DatabaseInitializer {
 
             """);
 
-    statement.execute("""
+        statement.execute("""
 
             CREATE TABLE IF NOT EXISTS
             health_index_category_score (
@@ -216,10 +214,10 @@ public class DatabaseInitializer {
     }
 
     private void createConversionTable(
-        Statement statement)
-        throws SQLException {
+            Statement statement)
+            throws SQLException {
 
-    statement.execute("""
+        statement.execute("""
 
             CREATE TABLE IF NOT EXISTS
             zhyd_hlth_conv (

@@ -20,22 +20,18 @@ public class ResultsPanel extends JPanel {
 
     private final DefaultTableModel model;
 
-    private final HealthIndexResultRepository
-            repository =
-            new HealthIndexResultRepository();
+    private final HealthIndexResultRepository repository
+            = new HealthIndexResultRepository();
 
     public ResultsPanel() {
-         Color bl = Color.decode("#023C6B");
+        Color bl = Color.decode("#023C6B");
         Color wh = Color.decode("#FFFFFF");
-        
-     
+
         Color b1 = Color.decode("#b0c3d1");
         Color b2 = Color.decode("#194d74");
         Font font = new Font("Arial", Font.PLAIN, 14);
-        
-     
+
         Border blBorder = BorderFactory.createLineBorder(bl, 2);
-        
 
         setBorder(blBorder);
         setLayout(new BorderLayout());
@@ -43,18 +39,12 @@ public class ResultsPanel extends JPanel {
         setForeground(wh);
 
         model = new DefaultTableModel(
-
                 new String[]{
-
-                        "Equipment",
-
-                        "Inspection Date",
-
-                        "Health Index",
-
-                        "Gateway Fail"
+                    "Equipment",
+                    "Inspection Date",
+                    "Health Index",
+                    "Gateway Fail"
                 },
-
                 0
         );
 
@@ -67,30 +57,25 @@ public class ResultsPanel extends JPanel {
                 new JScrollPane(table),
                 BorderLayout.CENTER);
 
-        
         GradientButton refresh = new GradientButton(" Refresh ", b1, b2);
 
         refresh.addActionListener(
                 e -> loadData());
 
-        JPanel top =
-                new JPanel();
+        JPanel top
+                = new JPanel();
 
         top.add(refresh);
 
-        
-        
         refresh.setForeground(wh);
         refresh.setFont(font);
 
         header.setBackground(bl);
         header.setForeground(wh);
         //header.setBorder(grBorder);
-        
+
         top.setBackground(bl);
-        
-        
-        
+
         top.add(refresh);
         add(top,
                 BorderLayout.NORTH);
@@ -104,25 +89,20 @@ public class ResultsPanel extends JPanel {
 
             model.setRowCount(0);
 
-            for (HealthIndexResult result :
-                    repository.findAll()) {
-                        
+            for (HealthIndexResult result
+                    : repository.findAll()) {
+
                 model.addRow(
                         new Object[]{
-
-                                result.equipmentId(),
-
-                                result.inspectionDate(),
-
-                                String.format("%.2f", result.healthIndex()*100.00)+"%",
-
-                                result.gatewayFail()
+                            result.equipmentId(),
+                            result.inspectionDate(),
+                            String.format("%.2f", result.healthIndex() * 100.00) + "%",
+                            result.gatewayFail()
                         });
             }
 
         } catch (SQLException ex) {
 
-           
         }
     }
 }

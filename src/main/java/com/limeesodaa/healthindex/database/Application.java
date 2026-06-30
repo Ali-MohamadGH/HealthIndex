@@ -6,8 +6,8 @@ public class Application {
             String[] args)
             throws Exception {
 
-        DatabaseInitializer initializer =
-                new DatabaseInitializer();
+        DatabaseInitializer initializer
+                = new DatabaseInitializer();
 
         initializer.initialize();
 
